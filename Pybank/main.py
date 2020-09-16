@@ -7,23 +7,31 @@ import csv
 budget_data = os.path.join('Resources', 'budget_data.csv')
 
 
-months = 0
+totalMonths = 0
 monthlyProfits = []
-# change= 0
+monthlyChange = []
 # greatest = 0
 # gst_month = []
 # least = 0
 # lst_month = []
-# previous_week = 867884
+
 
 with open(budget_data, "r") as budget_file:
     budget_reader = csv.reader(budget_file, delimiter=",")
     header = next(budget_reader)
 
     for rows in budget_reader:
-        months += 1
+        totalMonths += 1
         monthlyProfits.append(int(rows[1]))
     
+    for months in range(1, len(monthlyProfits)):
+        change = monthlyProfits[months] - monthlyProfits[months-1]
+        monthlyChange.append(change)
+
+    
+averageChange = float(sum(monthlyChange)/len(monthlyChange))
+        
+
 
 
 
@@ -53,9 +61,9 @@ with open(budget_data, "r") as budget_file:
        
 print("Financial Analysis")
 print("--------------------------")
-print(f"Total Months: {months}")
+print(f"Total Months: {totalMonths}")
 print(f"Total: ${sum(monthlyProfits)}")
-# print(f"Average Change: ${round(avg_change, 2)}")
+print(f"Average Change: ${round(averageChange, 2)}")
 # print(f"Greatest Increase in Profits: ${gst_month}")
 # print(f"Greatest Decrease in Profits: ${lst_month}")
 
