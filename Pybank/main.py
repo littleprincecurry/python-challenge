@@ -52,4 +52,15 @@ print(f"Average Change: ${round(averageChange, 2)}")
 print(f"Greatest Increase in Profits: {budgetDict.get(greatest)} (${greatest})")
 print(f"Greatest Decrease in Profits: {budgetDict.get(least)} (${least})")
 
-
+fileOutput = os.path.join('analysis', 'results.txt')
+with open(fileOutput, 'w') as fileWriter:
+    fileWriter.write(
+        "Financial Analysis\n"
+        "--------------------------\n"
+        f"Total Months: {totalMonths}\n"
+        f"Total: ${sum(monthlyProfits)}\n"
+        f"Average Change: ${round(averageChange, 2)}\n"
+        f"Greatest Increase in Profits: {budgetDict.get(greatest)} (${greatest})\n"
+        f"Greatest Decrease in Profits: {budgetDict.get(least)} (${least})\n"
+    )
+    fileWriter.close()
